@@ -1,10 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "grrn74XCaKnqyFn";
+$server_name = "localhost";
+$username = "";
+$password = "";
+$database_name = "";
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=pentalog_db", $username, $password);
+    $conn = new PDO("mysql:host=$server_name;dbname=$database_name", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
