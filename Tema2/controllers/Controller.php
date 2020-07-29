@@ -11,18 +11,18 @@ class Controller
         $this->query = new QueryBuilder($this->pdo);
     }
 
-    public function index ()
+    public function index()
     {
         $books = $this->query->selectAll('books', 'Book');
         require 'views' . DIRECTORY_SEPARATOR . 'index.view.php';
     }
 
-    public function create ()
+    public function create()
     {
         require 'views' . DIRECTORY_SEPARATOR . 'create.view.php';
     }
 
-    public function store ()
+    public function store()
     {
         $inputData['title'] = $_POST['title'];
         $inputData['author'] = $_POST['author'];
@@ -34,14 +34,14 @@ class Controller
         header("Location: index");
     }
 
-    public function edit ()
+    public function edit()
     {
         $id = intval($_GET['id']);
         $book = $this->query->selectById($id, 'books', 'Book');
         require 'views' . DIRECTORY_SEPARATOR . 'edit.view.php';
     }
 
-    public function update ()
+    public function update()
     {
         $updateData['id'] = intval($_POST['id']);
         $updateData['title'] = $_POST['title'];
@@ -55,7 +55,7 @@ class Controller
 
     }
 
-    public function delete ()
+    public function delete()
     {
         $id = intval($_GET['id']);
         $this->query->deleteById($id);

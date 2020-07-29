@@ -4,22 +4,22 @@ class QueryBuilder
 {
     protected ?PDO $connection = null;
 
-    public function __construct (PDO $connection) {
+    public function __construct(PDO $connection) {
         $this->connection = $connection;
     }
 
-    public function __destruct () {
+    public function __destruct() {
         $this->connection = null;
     }
 
-    public function selectAll (string $table, string $class) {
+    public function selectAll(string $table, string $class) {
         $statement = $this->connection->prepare("SELECT * FROM " . $table);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS, "$class");
     }
 
-    public function selectById (int $id, string $table, string $class) {
+    public function selectById(int $id, string $table, string $class) {
         $statement = $this->connection->prepare("SELECT * FROM " . $table . " WHERE `id` = ?");
         $statement->execute([$id]);
         $result = $statement->fetchAll(PDO::FETCH_CLASS, "$class")[0];
@@ -27,7 +27,7 @@ class QueryBuilder
         return $result;
     }
 
-    public function insertIfNotExistsAndReturnId ($name, $table): int {
+    public function insertIfNotExistsAndReturnId($name, $table): int {
         $statement = $this->connection->prepare("SELECT id FROM " . $table . " WHERE trim(name)=trim(:r_name)");
         $statement->bindParam(':r_name', $name);
         $statement->execute();
@@ -47,7 +47,7 @@ class QueryBuilder
         return $id;
     }
 
-    public function insert (array $parameters) {
+    public function insert(array $parameters) {
         // If the author name is not in the table we will add it
         $author_id = $this->insertIfNotExistsAndReturnId($parameters['author'], 'authors');
 
@@ -65,7 +65,7 @@ class QueryBuilder
         $statement->execute();
     }
 
-    public function updateById (array $parameters) {
+    public function updateById(array $parameters) {
 
         // If the author name is not in the table we will add it
         $author_id = $this->insertIfNotExistsAndReturnId($parameters['author'], 'authors');
@@ -94,7 +94,7 @@ class QueryBuilder
         $statement->execute();
     }
 
-    public function deleteById (int $id) {
+    public function deleteById(int $id) {
         $statement = $this->connection->prepare("DELETE FROM `books` WHERE `id` = :id");
         $statement->bindParam(':id', $id);
 
