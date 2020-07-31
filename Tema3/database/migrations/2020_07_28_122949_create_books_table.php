@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->year('publish_year');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable()->default(null);
+            $table->softDeletes();
         });
     }
 

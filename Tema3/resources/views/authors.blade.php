@@ -67,38 +67,41 @@
     </style>
 </head>
 <body>
-<h1>Book Records</h1>
+<h1>Authors</h1>
 <table>
     <tr>
         <th>Nr.Crt.</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Publisher Name</th>
-        <th>Publish Year</th>
-        <th>Created At</th>
-        <th>Updated At</th>
+        <th>Name</th>
+        <th>Nationality</th>
+        <th>Lifetime</th>
+        <th>Created at</th>
+        <th>Updated at</th>
         <th></th>
         <th></th>
     </tr>
-     <?php $nrCrt = 0; ?>
-     @foreach($books as $book)
-    <tr>
-        <?php $nrCrt++; ?>
-        <td>{{$nrCrt}}</td>
-        <td>{{$book->title}}</td>
-        <td>{{$book->author->name}}</td>
-        <td>{{$book->publisher->name}}</td>
-        <td>{{$book->publish_year}}</td>
-        <td>{{$book->created_at}}</td>
-        <td>{{$book->updated_at}}</td>
-        <td><a href="/edit?id={{$book->id}}">Edit</a></td>
-        <td><a href="/delete?id={{$book->id}}">Delete</a></td>
-    </tr>
+    <?php $nrCrt = 0; ?>
+    @foreach ($authors as $author)
+        <tr>
+            <?php $nrCrt++; ?>
+            <td>{{$nrCrt}}</td>
+                <td><a href="/author/{{$author->id}}">{{$author->name}}</a></td>
+                <td>{{$author->nationality}}</td>
+                <td>{{$author->born_date}} {{$author->born_country}} -
+                @if (! is_null($author->death_date))
+                    {{$author->death_date}} {{$author->death_country}}
+                    @else
+                    present
+                @endif
+                </td>
+                <td>{{$author->created_at}}</td>
+                <td>{{$author->updated_at}}</td>
+            <td><a href="/editAuthor/{{$author->id}}">Edit</a></td>
+            <td><a href="/deleteAuthor/{{$author->id}}">Delete</a></td>
+        </tr>
     @endforeach
 </table>
 <br>
-<button><a href="/authors" class="btn">authors</a></button>
-<button><a href="/publishers" class="btn">publishers</a></button>
-<button class="align_right"><a href="/create" class="btn">add a new record</a></button>
+<button><a href="/index"  class="btn">Cancel</a></button>
+<button class="align_right"><a href="/addAuthor" class="btn">add a new record</a></button>
 </body>
 </html>

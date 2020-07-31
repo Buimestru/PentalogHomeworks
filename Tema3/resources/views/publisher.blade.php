@@ -60,45 +60,40 @@
             color: blue;
             cursor: pointer;
         }
-
-        .align_right{
-            float: right;
-        }
     </style>
 </head>
 <body>
-<h1>Book Records</h1>
+<h1>{{$publisher->name}}</h1>
+<h2>Status: {{$publisher->status}}</h2>
+<h2>Foundation Year: {{$publisher->foundation_year}}</h2>
+<h2>Origin Country: {{$publisher->origin_country}}</h2>
 <table>
     <tr>
         <th>Nr.Crt.</th>
         <th>Title</th>
-        <th>Author</th>
-        <th>Publisher Name</th>
+        <th>Author Name</th>
         <th>Publish Year</th>
         <th>Created At</th>
         <th>Updated At</th>
         <th></th>
         <th></th>
     </tr>
-     <?php $nrCrt = 0; ?>
-     @foreach($books as $book)
-    <tr>
-        <?php $nrCrt++; ?>
-        <td>{{$nrCrt}}</td>
-        <td>{{$book->title}}</td>
-        <td>{{$book->author->name}}</td>
-        <td>{{$book->publisher->name}}</td>
-        <td>{{$book->publish_year}}</td>
-        <td>{{$book->created_at}}</td>
-        <td>{{$book->updated_at}}</td>
-        <td><a href="/edit?id={{$book->id}}">Edit</a></td>
-        <td><a href="/delete?id={{$book->id}}">Delete</a></td>
-    </tr>
+    <?php $nrCrt = 0; ?>
+    @foreach($publisher->books as $book)
+        <tr>
+            <?php $nrCrt++; ?>
+            <td>{{$nrCrt}}</td>
+            <td>{{$book->title}}</td>
+            <td>{{$book->author->name}}</td>
+            <td>{{$book->publish_year}}</td>
+            <td>{{$book->created_at}}</td>
+            <td>{{$book->updated_at}}</td>
+            <td><a href="/edit?id={{$book->id}}">Edit</a></td>
+            <td><a href="/delete?id={{$book->id}}">Delete</a></td>
+        </tr>
     @endforeach
 </table>
 <br>
-<button><a href="/authors" class="btn">authors</a></button>
-<button><a href="/publishers" class="btn">publishers</a></button>
-<button class="align_right"><a href="/create" class="btn">add a new record</a></button>
+<button><a href="/publishers"  class="btn">Cancel</a></button>
 </body>
 </html>

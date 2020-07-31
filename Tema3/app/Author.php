@@ -3,13 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Author extends Model
 {
-    protected $fillable = ['name'];
-    public $timestamps = false;
+    use SoftDeletes;
 
-    function books() {
-        $this->hasMany('Book', 'id');
+    protected $fillable = ['name', 'nationality', 'born_date', 'born_country', 'death_date', 'death_country', 'created_at'];
+    protected $dates = ['deleted_at'];
+
+    function books()
+    {
+        return $this->hasMany('App\Book', 'author_id');
     }
 }

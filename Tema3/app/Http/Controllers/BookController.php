@@ -11,62 +11,68 @@ use App\Book;
 
 class BookController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $books = Book::with('author')
                      ->with('publisher')
                      ->get();
-        //dd($books);
+
         return view('index', ['books' => $books]);
     }
 
-    public function create() {
+    public function create()
+    {
         return view('create');
     }
 
-    public function store() {
-        if (! empty($_POST['title']) and
-            ! empty($_POST['author']) and
-            ! empty($_POST['publisher']) and
-            ! empty($_POST['publish_year'])
-        ) {
-            $title = $_POST['title'];
-            $author_name = $_POST['author'];
-            $publisher_name = $_POST['publisher'];
-            $publish_year = $_POST['publish_year'];
+    public function store()
+    {
+        $title = request('title');
+        $author_name = request('author');
+        $publisher_name = request('publisher');
+        $publish_year = request('publish_year');
 
+        if (! is_null($title) and
+            ! is_null($author_name) and
+            ! is_null($publish_year) and
+            ! is_null($publisher_name)
+        ) {
             $author_id = Author::firstOrCreate(['name' => $author_name])->id;
             $publisher_id = Publisher::firstOrCreate(['name' => $publisher_name])->id;
 
             Book::create(['title' => $title,
-                'author_id' => $author_id,
-                'publisher_id' => $publisher_id,
-                'publish_year' => $publish_year,
-                'created_at' => NOW()
+                        'author_id' => $author_id,
+                        'publisher_id' => $publisher_id,
+                        'publish_year' => $publish_year,
+                        'created_at' => NOW()
             ]);
 
             return redirect('/');
         }
     }
 
-    public function edit() {
-        $id = intval($_GET['id']);
+    public function edit()
+    {
+        $id = intval(request('id'));
 
         $book = Book::whereId($id)->first();
 
         return view('edit', ['book' => $book]);
     }
 
-    public function update() {
-        if (! empty($_POST['title']) and
-            ! empty($_POST['author']) and
-            ! empty($_POST['publisher']) and
-            ! empty($_POST['publish_year'])
+    public function update()
+    {
+        $id = intval(request('id'));
+        $title = request('title');
+        $author_name = request('author');
+        $publisher_name = request('publisher');
+        $publish_year = request('publish_year');
+
+        if (! is_null($title) and
+            ! is_null($author_name) and
+            ! is_null($publish_year) and
+            ! is_null($publisher_name)
         ) {
-            $id = $_POST['id'];
-            $title = $_POST['title'];
-            $author_name = $_POST['author'];
-            $publisher_name = $_POST['publisher'];
-            $publish_year = $_POST['publish_year'];
 
             $author_id = Author::firstOrCreate(['name' => $author_name])->id;
             $publisher_id = Publisher::firstOrCreate(['name' => $publisher_name])->id;
@@ -83,8 +89,9 @@ class BookController extends Controller
         }
     }
 
-    public function delete() {
-        $id = intval($_GET['id']);
+    public function delete()
+    {
+        $id = intval(\request('id'));
 
         Book::whereId($id)->delete();
 

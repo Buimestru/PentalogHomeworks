@@ -16,6 +16,12 @@ class CreatePublishersTable extends Migration
         Schema::create('publishers', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name');
+            $table->string('status')->nullable();
+            $table->year('foundation_year')->nullable();
+            $table->string('origin_country')->nullable();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable()->default(null);
+            $table->softDeletes();
         });
     }
 

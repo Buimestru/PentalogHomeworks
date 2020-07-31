@@ -13,17 +13,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', '\App\Http\Controllers\BookController@index');
+Route::get('/', 'BookController@index');
 
-Route::get('create', '\App\Http\Controllers\BookController@create');
+Route::get('create', 'BookController@create');
 
-Route::post('store', '\App\Http\Controllers\BookController@store');
+Route::post('store', 'BookController@store');
 
-Route::get('edit', '\App\Http\Controllers\BookController@edit');
+Route::get('edit', 'BookController@edit');
 
-Route::post('update', '\App\Http\Controllers\BookController@update');
+Route::post('update', 'BookController@update');
 
-Route::get('delete', '\App\Http\Controllers\BookController@delete');
+Route::get('delete', 'BookController@delete');
 
-Route::get('index', '\App\Http\Controllers\BookController@index');
+Route::get('index', 'BookController@index');
 
+Route::get('authors', 'AuthorController@index');
+
+Route::get('addAuthor', 'AuthorController@create');
+
+Route::post('storeAuthor', 'AuthorController@store');
+
+Route::get('editAuthor/{id}', 'AuthorController@edit');
+
+Route::post('updateAuthor/{id}', 'AuthorController@update');
+
+Route::get('deleteAuthor/{id}', 'AuthorController@delete');
+
+Route::get('author/{id}', 'AuthorController@show');
+
+Route::get('publishers', 'PublisherController@index');
+
+Route::get('addPublisher', 'PublisherController@create');
+
+Route::post('storePublisher', 'PublisherController@store');
+
+Route::get('editPublisher/{id}', 'PublisherController@edit');
+
+Route::post('updatePublisher/{id}', 'PublisherController@update');
+
+Route::get('deletePublisher/{id}', 'PublisherController@delete');
+
+Route::get('publisher/{id}', 'PublisherController@show');

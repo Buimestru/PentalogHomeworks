@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Main page</title>
+    <title>Edit page</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
     <style>
         table {
@@ -60,45 +60,36 @@
             color: blue;
             cursor: pointer;
         }
-
-        .align_right{
-            float: right;
-        }
     </style>
 </head>
 <body>
-<h1>Book Records</h1>
-<table>
-    <tr>
-        <th>Nr.Crt.</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Publisher Name</th>
-        <th>Publish Year</th>
-        <th>Created At</th>
-        <th>Updated At</th>
-        <th></th>
-        <th></th>
-    </tr>
-     <?php $nrCrt = 0; ?>
-     @foreach($books as $book)
-    <tr>
-        <?php $nrCrt++; ?>
-        <td>{{$nrCrt}}</td>
-        <td>{{$book->title}}</td>
-        <td>{{$book->author->name}}</td>
-        <td>{{$book->publisher->name}}</td>
-        <td>{{$book->publish_year}}</td>
-        <td>{{$book->created_at}}</td>
-        <td>{{$book->updated_at}}</td>
-        <td><a href="/edit?id={{$book->id}}">Edit</a></td>
-        <td><a href="/delete?id={{$book->id}}">Delete</a></td>
-    </tr>
-    @endforeach
-</table>
-<br>
-<button><a href="/authors" class="btn">authors</a></button>
-<button><a href="/publishers" class="btn">publishers</a></button>
-<button class="align_right"><a href="/create" class="btn">add a new record</a></button>
+<h1>Edit a record</h1>
+<form method="post" action="/updatePublisher/{{$publisher->id}}">
+    @csrf
+    <div>
+        <label>Name</label>
+        <input type="text" name="name" value="{{$publisher->name}}">
+    </div>
+    <div>
+        <label>Status</label>
+        <input list="status" type="text" name="status" value="{{$publisher->status}}">
+        <datalist id="status">
+            <option>Active</option>
+            <option>Inactive</option>
+        </datalist>
+    </div>
+    <div>
+        <label>Foundation Year</label>
+        <input type="text" name="foundation_year" value="{{$publisher->foundation_year}}">
+    </div>
+    <div>
+        <label>Origin Country</label>
+        <input type="text" name="origin_country" value="{{$publisher->origin_country}}">
+    </div>
+    <div>
+        <button><a href="/publishers" class="btn">Cancel</a></button>
+        <button class="btn" type="submit" name="edit_a_record">Edit</button>
+    </div>
+</form>
 </body>
 </html>
