@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Author;
+use App\Http\Requests\StoreBookPost;
 use App\Publisher;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use function GuzzleHttp\Promise\all;
 use App\Book;
 
 class BookController extends Controller
@@ -17,82 +15,67 @@ class BookController extends Controller
                      ->with('publisher')
                      ->get();
 
-        return view('index', ['books' => $books]);
+        return view('books\index', ['books' => $books]);
     }
 
     public function create()
     {
-        return view('create');
+        $authors = Author::get();
+        $publishers = Publisher::get();
+
+        return view('books\create', ['authors' => $authors, 'publishers' => $publishers]);
     }
 
-    public function store()
+    public function store(StoreBookPost $request)
     {
-        $title = request('title');
-        $author_name = request('author');
-        $publisher_name = request('publisher');
-        $publish_year = request('publish_year');
+        $title = $request->input('title');
+        $author_name = $request->input('author');
+        $publisher_name = $request->input('publisher');
+        $publish_year = $request->input('publish_year');
 
-        if (! is_null($title) and
-            ! is_null($author_name) and
-            ! is_null($publish_year) and
-            ! is_null($publisher_name)
-        ) {
-            $author_id = Author::firstOrCreate(['name' => $author_name])->id;
-            $publisher_id = Publisher::firstOrCreate(['name' => $publisher_name])->id;
+        $author_id = Author::where('name', $author_name)->first()->id;
+        $publisher_id = Publisher::where('name', $publisher_name)->first()->id;
 
-            Book::create(['title' => $title,
-                        'author_id' => $author_id,
-                        'publisher_id' => $publisher_id,
-                        'publish_year' => $publish_year,
-                        'created_at' => NOW()
-            ]);
+        Book::create(['title' => $title,
+            'author_id' => $author_id,
+            'publisher_id' => $publisher_id,
+            'publish_year' => $publish_year
+        ]);
 
-            return redirect('/');
-        }
+        return redirect('/');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $id = intval(request('id'));
-
         $book = Book::whereId($id)->first();
+        $authors = Author::get();
+        $publishers = Publisher::get();
 
-        return view('edit', ['book' => $book]);
+        return view('books\edit', ['book' => $book, 'authors' => $authors, 'publishers' => $publishers]);
     }
 
-    public function update()
+    public function update(StoreBookPost $request, $id)
     {
-        $id = intval(request('id'));
-        $title = request('title');
-        $author_name = request('author');
-        $publisher_name = request('publisher');
-        $publish_year = request('publish_year');
+        $author_name = $request->input('author');
+        $publisher_name = $request->input('publisher');
+        $publish_year = $request->input('publish_year');
+        $title = $request->input('title');
 
-        if (! is_null($title) and
-            ! is_null($author_name) and
-            ! is_null($publish_year) and
-            ! is_null($publisher_name)
-        ) {
+        $author_id = Author::where('name', $author_name)->first()->id;
+        $publisher_id = Publisher::where('name', $publisher_name)->first()->id;
 
-            $author_id = Author::firstOrCreate(['name' => $author_name])->id;
-            $publisher_id = Publisher::firstOrCreate(['name' => $publisher_name])->id;
+        Book::whereId($id)->update([
+            'title' => $title,
+            'author_id' => $author_id,
+            'publisher_id' => $publisher_id,
+            'publish_year' => $publish_year
+        ]);
 
-            Book::whereId($id)->update([
-                    'title' => $title,
-                    'author_id' => $author_id,
-                    'publisher_id' => $publisher_id,
-                    'publish_year' => $publish_year,
-                    'updated_at' => NOW()
-                ]);
-
-            return redirect('/');
-        }
+        return redirect('/');
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $id = intval(\request('id'));
-
         Book::whereId($id)->delete();
 
         return redirect('/');

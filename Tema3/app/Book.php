@@ -11,8 +11,7 @@ class Book extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'author_id', 'publisher_id', 'publish_year', 'created_at', 'updated_at'];
-    public $timestamps = false;
+    protected $fillable = ['title', 'author_id', 'publisher_id', 'publish_year'];
     protected $dates = ['deleted_at'];
 
     function author()

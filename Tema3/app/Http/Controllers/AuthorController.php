@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreAuthorPost;
 use App\Author;
 
 class AuthorController extends Controller
@@ -12,77 +12,67 @@ class AuthorController extends Controller
     {
         $authors = Author::get();
 
-        return view('authors', ['authors' => $authors]);
+        return view('authors\index', ['authors' => $authors]);
     }
 
     public function create()
     {
-        return view('addAuthor');
+        return view('authors\create');
     }
 
-    public function store(Request $request)
+    public function store(StoreAuthorPost $request)
     {
-        if (! empty($request->input('name'))) {
-            $name = $request->input('name');
-            $nationality = $request->input('nationality');
-            $born_date = $request->input('born_date');
-            $born_country = $request->input('born_country');
-            $death_date = $request->input('death_date');
-            $death_country = $request->input('death_country');
+        $name = $request->input('name');
+        $nationality = $request->input('nationality');
+        $born_date = $request->input('born_date');
+        $born_country = $request->input('born_country');
+        $death_date = $request->input('death_date');
+        $death_country = $request->input('death_country');
 
-            Author::create(['name' => $name,
-                            'nationality' => $nationality,
-                            'born_date' => $born_date,
-                            'born_country' => $born_country,
-                            'death_date' => $death_date,
-                            'death_country' => $death_country,
-                            'created_at' => NOW()
-                            ]);
+        Author::create(['name' => $name,
+            'nationality' => $nationality,
+            'born_date' => $born_date,
+            'born_country' => $born_country,
+            'death_date' => $death_date,
+            'death_country' => $death_country
+        ]);
 
-            return redirect('/authors');
-        } else {
-            return redirect('/addAuthor');
-        }
+        return redirect('/authors');
     }
 
     public function show($id)
     {
         $author = Author::with('books')->whereId($id)->first();
 
-        return view('author', ['author' => $author]);
+        return view('authors\show', ['author' => $author]);
     }
 
     public function edit($id)
     {
         $author = Author::with('books')->whereId($id)->first();
 
-        return view('editAuthor', ['author' => $author]);
+        return view('authors\edit', ['author' => $author]);
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreAuthorPost $request, $id)
     {
-        if (! empty($request->input('name'))) {
-            $name = $request->input('name');
-            $nationality = $request->input('nationality');
-            $born_date = $request->input('born_date');
-            $born_country = $request->input('born_country');
-            $death_date = $request->input('death_date');
-            $death_country = $request->input('death_country');
+        $name = $request->input('name');
+        $nationality = $request->input('nationality');
+        $born_date = $request->input('born_date');
+        $born_country = $request->input('born_country');
+        $death_date = $request->input('death_date');
+        $death_country = $request->input('death_country');
 
 
-            Author::whereId($id)->update(['name' => $name,
-                                          'nationality' => $nationality,
-                                          'born_date' => $born_date,
-                                          'born_country' => $born_country,
-                                          'death_date' => $death_date,
-                                          'death_country' => $death_country,
-                                          'updated_at' => NOW()
-                                        ]);
+        Author::whereId($id)->update(['name' => $name,
+            'nationality' => $nationality,
+            'born_date' => $born_date,
+            'born_country' => $born_country,
+            'death_date' => $death_date,
+            'death_country' => $death_country
+        ]);
 
-            return redirect('/authors');
-        } else {
-            return redirect('/editAuthor/' . $id);
-        }
+        return redirect('/authors');
     }
 
     public function delete($id)

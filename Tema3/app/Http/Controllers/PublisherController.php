@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePublisherPost;
 use App\Book;
 use App\Publisher;
 
@@ -12,68 +12,58 @@ class PublisherController extends Controller
     {
         $publishers = Publisher::get();
 
-        return view('publishers', ['publishers' => $publishers]);
+        return view('publishers\index', ['publishers' => $publishers]);
     }
 
     public function create()
     {
-        return view('addPublisher');
+        return view('publishers\create');
     }
 
-    public function store(Request $request)
+    public function store(StorePublisherPost $request)
     {
-        if (! empty($request->input('name'))) {
-            $name = $request->input('name');
-            $status = $request->input('status');
-            $foundation_year = $request->input('foundation_year');
-            $origin_country = $request->input('origin_country');
+        $name = $request->input('name');
+        $status = $request->input('status');
+        $foundation_year = $request->input('foundation_year');
+        $origin_country = $request->input('origin_country');
 
-            Publisher::create(['name' => $name,
-                'status' => $status,
-                'foundation_year' => $foundation_year,
-                'origin_country' => $origin_country,
-                'created_at' => NOW()
-            ]);
+        Publisher::create(['name' => $name,
+            'status' => $status,
+            'foundation_year' => $foundation_year,
+            'origin_country' => $origin_country,
+        ]);
 
-            return redirect('/publishers');
-        } else {
-            return redirect('/addPublisher');
-        }
+        return redirect('/publishers');
     }
 
     public function show($id)
     {
         $publisher = Publisher::with('books')->whereId($id)->first();
 
-        return view('publisher', ['publisher' => $publisher]);
+        return view('publishers\show', ['publisher' => $publisher]);
     }
 
     public function edit($id)
     {
         $publisher = Publisher::with('books')->whereId($id)->first();
 
-        return view('editPublisher', ['publisher' => $publisher]);
+        return view('publishers\edit', ['publisher' => $publisher]);
     }
 
-    public function update(Request $request, $id)
+    public function update(StorePublisherPost $request, $id)
     {
-        if (! empty($request->input('name'))) {
-            $name = $request->input('name');
-            $status = $request->input('status');
-            $foundation_year = $request->input('foundation_year');
-            $origin_country = $request->input('origin_country');
+        $name = $request->input('name');
+        $status = $request->input('status');
+        $foundation_year = $request->input('foundation_year');
+        $origin_country = $request->input('origin_country');
 
-            Publisher::whereId($id)->update(['name' => $name,
-                'status' => $status,
-                'foundation_year' => $foundation_year,
-                'origin_country' => $origin_country,
-                'updated_at' => NOW()
-            ]);
+        Publisher::whereId($id)->update(['name' => $name,
+            'status' => $status,
+            'foundation_year' => $foundation_year,
+            'origin_country' => $origin_country
+        ]);
 
-            return redirect('/publishers');
-        } else {
-            return redirect('/editPublisher/' . $id);
-        }
+        return redirect('/publishers');
     }
 
     public function delete($id)

@@ -13,44 +13,56 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Book routes
+ */
+
 Route::get('/', 'BookController@index');
 
 Route::get('create', 'BookController@create');
 
 Route::post('store', 'BookController@store');
 
-Route::get('edit', 'BookController@edit');
+Route::get('edit/{id}', 'BookController@edit');
 
-Route::post('update', 'BookController@update');
+Route::put('update/{id}', 'BookController@update');
 
-Route::get('delete', 'BookController@delete');
+Route::delete('delete/{id}', 'BookController@delete');
 
 Route::get('index', 'BookController@index');
 
+/**
+ * Author routes
+ */
+
 Route::get('authors', 'AuthorController@index');
 
-Route::get('addAuthor', 'AuthorController@create');
+Route::get('createAuthor', 'AuthorController@create');
 
 Route::post('storeAuthor', 'AuthorController@store');
 
 Route::get('editAuthor/{id}', 'AuthorController@edit');
 
-Route::post('updateAuthor/{id}', 'AuthorController@update');
+Route::put('updateAuthor/{id}', 'AuthorController@update');
 
-Route::get('deleteAuthor/{id}', 'AuthorController@delete');
+Route::delete('deleteAuthor/{id}', 'AuthorController@delete');
 
 Route::get('author/{id}', 'AuthorController@show');
 
+/**
+ * Publisher routes
+ */
+
 Route::get('publishers', 'PublisherController@index');
 
-Route::get('addPublisher', 'PublisherController@create');
+Route::get('createPublisher', 'PublisherController@create');
 
 Route::post('storePublisher', 'PublisherController@store');
 
 Route::get('editPublisher/{id}', 'PublisherController@edit');
 
-Route::post('updatePublisher/{id}', 'PublisherController@update');
+Route::put('updatePublisher/{id}', 'PublisherController@update');
 
-Route::get('deletePublisher/{id}', 'PublisherController@delete');
+Route::delete('deletePublisher/{id}', 'PublisherController@delete');
 
 Route::get('publisher/{id}', 'PublisherController@show');

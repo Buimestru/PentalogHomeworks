@@ -7,11 +7,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/AuthorController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -115,12 +116,12 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/version" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="ProjectId" id="1fJPXBxx1RuoXAysqnu8D0O2KVl" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -131,6 +132,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Laravel\Tema3\resources\views\publishers" />
+      <recent name="C:\xampp\htdocs\Laravel\Tema3\resources\views\authors" />
+      <recent name="C:\xampp\htdocs\Laravel\Tema3\resources\views\books" />
       <recent name="C:\xampp\htdocs\Laravel\Tema3\css" />
       <recent name="C:\xampp\htdocs\Laravel\Tema3\resources\sass" />
     </key>
@@ -141,6 +145,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -151,34 +156,40 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1595933259839</updated>
-      <workItem from="1595933261694" duration="51831000" />
+      <workItem from="1595933261694" duration="53405000" />
+      <workItem from="1596269490176" duration="10234000" />
+      <workItem from="1596376668557" duration="30883000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1596376312660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1596376312660" />
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1596195515204">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1596195515204" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1595934994911">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1596545992726">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1595934994911" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1595934994910">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1596545992726" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1596545992726">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1595934994910" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1595934994910">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1596545992726" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1596545992726">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1595934994910" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1595934994911">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1596545992726" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1596545992726">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1595934994911" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1596545992726" />
     <state x="604" y="336" key="NewPhpFileDialog" timestamp="1596139104616">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -187,9 +198,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1596186279215" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1596011880772">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1596380524159">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1596011880772" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1596380524159" />
   </component>
 </project>
