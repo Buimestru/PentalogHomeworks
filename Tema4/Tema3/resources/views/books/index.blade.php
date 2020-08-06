@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main page</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Book Records</h1>
+    <table>
+        <tr>
+            <th>Nr.Crt.</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher Name</th>
+            <th>Publish Year</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th></th>
+            <th></th>
+        </tr>
+         <?php $nrCrt = 0; ?>
+         @foreach($books as $book)
+        <tr>
+            <?php $nrCrt++; ?>
+            <td>{{$nrCrt}}</td>
+            <td>{{$book->title}}</td>
+            <td><a href="/author/{{$book->author_id}}">{{$book->author->name}}</a></td>
+            <td><a href="/publisher/{{$book->publisher_id}}">{{$book->publisher->name}}</a></td>
+            <td>{{$book->publish_year}}</td>
+            <td>{{$book->created_at}}</td>
+            <td>{{$book->updated_at}}</td>
+            <td><a href="/edit/{{$book->id}}">Edit</a></td>
+            <td><form action="/delete/{{$book->id}}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </table>
+    <br>
+    <button><a href="/authors" class="btn">authors</a></button>
+    <button><a href="/publishers" class="btn">publishers</a></button>
+    <button><a href="/users" class="btn">users</a></button>
+    <button><a href="/borrowings" class="btn">borrowings</a></button>
+    <button class="align_right"><a href="/create" class="btn">add a new record</a></button>
+</body>
+</html>
