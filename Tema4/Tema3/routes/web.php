@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,3 +97,12 @@ Route::get('createBorrowing/{user_id}', 'BorrowingController@create');
 Route::post('storeBorrowing', 'BorrowingController@store');
 
 Route::put('updateBorrowing/{id}', 'BorrowingController@update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')
+    ->name('home');
+
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('is_admin')
+    ->name('admin');

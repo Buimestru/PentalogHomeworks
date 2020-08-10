@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Book;
 use App\Borrowing;
 use App\Http\Requests\StoreBorrowingPost;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BorrowingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $borrowings = Borrowing::with('user', 'book')->orderBy('returned_at')->get();
@@ -22,7 +29,12 @@ class BorrowingController extends Controller
     {
         $available_books = Book::available()->get();
 
-        return view('borrowings\create', ['available_books' => $available_books, 'user_id' => $user_id]);
+        $user = User::whereId($user_id)->first();
+        $authenticated_user = Auth::user();
+
+        if ($user->email === $authenticated_user->email) {
+            return view('borrowings\create', ['available_books' => $available_books, 'user_id' => $user_id]);
+        }
     }
 
     public function store(StoreBorrowingPost $request)

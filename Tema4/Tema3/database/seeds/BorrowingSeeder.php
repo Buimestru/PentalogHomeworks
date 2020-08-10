@@ -2,6 +2,7 @@
 
 use App\Borrowing;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BorrowingSeeder extends Seeder
 {

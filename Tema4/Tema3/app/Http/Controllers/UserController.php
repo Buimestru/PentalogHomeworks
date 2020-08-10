@@ -6,10 +6,16 @@ use App\Borrowing;
 use App\Http\Requests\StoreUserPost;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $users = User::get();
@@ -43,8 +49,11 @@ class UserController extends Controller
     {
         $user = User::with('borrowedBooks')->whereId($id)->first();
         //dd($user);
+        $authenticated_user = Auth::user();
 
-        return view('users\show', ['user' => $user]);
+        if ($user->email === $authenticated_user->email) {
+            return view('users\show', ['user' => $user]);
+        }
     }
 
     public function edit($id)

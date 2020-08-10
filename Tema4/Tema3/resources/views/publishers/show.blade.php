@@ -15,10 +15,12 @@
         <th>Title</th>
         <th>Author Name</th>
         <th>Publish Year</th>
+        @auth()
         <th>Created At</th>
         <th>Updated At</th>
         <th></th>
         <th></th>
+        @endauth
     </tr>
     <?php $nrCrt = 0; ?>
     @foreach($publisher->books as $book)
@@ -28,6 +30,7 @@
             <td>{{$book->title}}</td>
             <td>{{$book->author->name}}</td>
             <td>{{$book->publish_year}}</td>
+                @auth()
             <td>{{$book->created_at}}</td>
             <td>{{$book->updated_at}}</td>
             <td><a href="/edit/{{$book->id}}">Edit</a></td>
@@ -37,6 +40,7 @@
                     <button type="submit">Delete</button>
                 </form>
             </td>
+                @endauth
         </tr>
     @endforeach
 </table>

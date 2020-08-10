@@ -12,10 +12,12 @@
         <th>Name</th>
         <th>Nationality</th>
         <th>Lifetime</th>
+        @auth()
         <th>Created at</th>
         <th>Updated at</th>
         <th></th>
         <th></th>
+        @endauth
     </tr>
     <?php $nrCrt = 0; ?>
     @foreach ($authors as $author)
@@ -31,20 +33,24 @@
                     present
                 @endif
                 </td>
+                @auth()
                 <td>{{$author->created_at}}</td>
                 <td>{{$author->updated_at}}</td>
-            <td><a href="/editAuthor/{{$author->id}}">Edit</a></td>
-            <td><form action="/deleteAuthor/{{$author->id}}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
+                <td><a href="/editAuthor/{{$author->id}}">Edit</a></td>
+                <td><form action="/deleteAuthor/{{$author->id}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                @endauth
         </tr>
     @endforeach
 </table>
 <br>
 <button><a href="/index"  class="btn">Cancel</a></button>
+@auth()
 <button class="align_right"><a href="/createAuthor" class="btn">add a new record</a></button>
+@endauth
 </body>
 </html>
